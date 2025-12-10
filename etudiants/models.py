@@ -12,11 +12,12 @@ class Etudiant(models.Model):
     telephone = models.CharField(max_length=20)
     cin = models.CharField(max_length=12)  
     annee_bacc = models.DateField()
-    code_redoublement = models.IntegerField(null=True, blank=True)
+    code_redoublement = models.CharField(max_length=10)
+    
     faculte = models.CharField(max_length=50)
     domaine = models.CharField(max_length=50)
-    niveau = models.CharField(max_length=15)
-    
+    niveau = models.CharField(max_length=15) 
+      
     nationalite = models.CharField(max_length=50)
     photo = models.ImageField(upload_to='Etudiant/', null=True, blank=True)
     

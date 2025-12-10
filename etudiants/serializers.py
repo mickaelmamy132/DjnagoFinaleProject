@@ -6,9 +6,21 @@ from datetime import date
 class EtudiantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Etudiant
-        fields = ['id', 'nom', 'prenom', 'email', 'bourse', 'niveau', 'code_redoublement', 'numero_inscription', 'created_by']
-        read_only_fields = ['created_by']
-
+        fields = [
+            'id','matricule','numero_inscription', 'nom','prenom','date_naissance', 'telephone','cin',
+            'annee_bacc',
+            'code_redoublement',
+            'faculte',
+            'domaine',
+            'niveau',
+            'nationalite',
+            'photo',
+            'bourse',
+            'boursier',
+            'created_at',
+            'updated_at'
+        ]
+    read_only_fields = ['created_at', 'updated_at']
     def create(self, validated_data):
         numero_inscription = validated_data.get('numero_inscription')
         # 1) Vérifier si l'étudiant existe déjà (réinscription)
@@ -23,7 +35,7 @@ class EtudiantSerializer(serializers.ModelSerializer):
         niveau = etudiant.niveau
         code_redoublement = etudiant.code_redoublement
 
-        # 3) Calcul de la bourse selon les règles
+        # 3) Calcul de la bourse selon les règles   
         if boursier == "OUI":
             if niveau in ["M2", "M1", "DOT1"]:
                 montant_bourse = 48400.00 if code_redoublement == "N" else 48400.00 / 2
@@ -56,3 +68,5 @@ class EtudiantSerializer(serializers.ModelSerializer):
         )
 
         return etudiant
+
+
