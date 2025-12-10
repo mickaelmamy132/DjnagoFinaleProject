@@ -2,9 +2,8 @@ from django.db import models
 
 class Etudiant(models.Model):
     """Profil d'étudiant avec informations supplémentaires"""
-    # paiement = models.IntegerField('paiements.Paiement', on_delete=models.CASCADE,null=True, blank=True, related_name='etudiant_Profil')
-    paiement = models.IntegerField()
-    bourse = models.FloatField()
+    bourse = models.FloatField(default=0)
+    boursier = models.CharField(max_length=10)
     numero_inscription = models.CharField(max_length=50, unique=True)
     matricule = models.CharField(max_length=50, unique=True)
     nom = models.CharField(max_length=20)
