@@ -28,7 +28,6 @@ class Bourse(models.Model):
         ordering = ['-date_demande']
     
     def __str__(self):
-        # Utilise un champ existant (status ou montant) au lieu de type_bourse
         return f"Bourse {self.status} - {self.etudiant.nom} ({self.annee_academique})"
 
 

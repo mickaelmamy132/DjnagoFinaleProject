@@ -23,9 +23,21 @@ class EtudiantSerializer(serializers.ModelSerializer):
     read_only_fields = ['created_at', 'updated_at']
     def create(self, validated_data):
         numero_inscription = validated_data.get('numero_inscription')
+        niveau = validated_data.get('niveau')
+        code_redoublement = validated_data.get('code_redoublant')
+        bourse = 0.0
+        if niveau in ["M2", "M1", "DOT1"]:
+            bourse = 48400.00 if code_redoublement == "N" else 48400.00 / 2
+        if niveau in "L3":
+            bourse = 36300.00 if code_redoublement == "N" else 36300.00 / 2
+        if niveau in "L2":
+            bourse = 30250.00 if code_redoublement == "N" else 30250.00 / 2  
+        if niveau in "L1":
+            bourse = 20550.00 if code_redoublement == "N" else 20550.00 / 2          
         # 1) Vérifier si l'étudiant existe déjà (réinscription)
         etudiant, created = Etudiant.objects.get_or_create(
             numero_inscription=numero_inscription,
+            bourse=bourse,
             defaults=validated_data
         )
 
@@ -68,5 +80,13 @@ class EtudiantSerializer(serializers.ModelSerializer):
         )
 
         return etudiant
+    
+class EtudiantDetailSerializers(serializers.ModelSerializer):
+    etudiant = EtudiantSerializer(read_only=True)
+    
+    class Meta:
+        model = Etudiant
+        fields = '__all__'
+        read_only_fields = ['created_at', 'updated_at']
 
 
