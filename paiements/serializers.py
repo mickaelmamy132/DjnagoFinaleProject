@@ -58,3 +58,27 @@ class PaiementSerializer(serializers.ModelSerializer):
 
 
 
+# POST /paiements/
+# {
+#   "etudiant": 5,
+#   "montant": 2000,
+#   "status": "EN_ATTENTE",
+#   "notes": "Paiement individuel",
+#   "echeancier": {
+#     "nombre_echeances": 2,
+#     "montant_par_echeance": 1000
+#   }
+# }
+
+
+# POST /paiements/
+# {
+#   "faculte": "Sciences",
+#   "montant": 1500,
+#   "status": "EN_ATTENTE",
+#   "notes": "Paiement bourse pour toute la faculté",
+#   "echeancier": {
+#     "nombre_echeances": 3,
+#     "montant_par_echeance": 500
+#   }
+# }
