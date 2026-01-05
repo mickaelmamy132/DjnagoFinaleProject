@@ -27,18 +27,5 @@ class EtudiantViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         except Etudiant.DoesNotExist:
             return Response({'error': 'Etudiant non trouvé'}, status=status.HTTP_404_NOT_FOUND)
-    # @action(detail=False,methods=['patch'])
-    # def mettre_a_jou_etud(self, request):
-    #     try:
-    #         etudiant = self.get_object()
-    #         serializer = EtudiantDetailSerializers(etudiant, data=request.data, partial=True)
-    #         if serializer.is_valid():
-    #             serializer.save()
-    #             return Response(serializer.data)
-    #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    #     except Etudiant.DoesNotExist:
-    #         return Response({'error': 'Etudiant non trouvé'}, status=status.HTTP_404_NOT_FOUND)
-        
-        
 
     
